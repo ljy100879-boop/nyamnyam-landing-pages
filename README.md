@@ -23,4 +23,20 @@
 - 브라우저에는 **API 키만** 들어갑니다. API 키는 이벤트 전송용 공개 키라 페이지에 노출돼도 되는 값입니다.
 - **비밀 키(`AMPLITUDE_SECRET_KEY`)는 `.env` 에만** 두고, 웹페이지·저장소에는 절대 넣지 않습니다.
 - 자동 수집: 페이지뷰, 세션, UTM 기반 유입 경로(attribution)
-- 직접 보내는 이벤트: `lp_view`, `cta_click`, `store_click`, `scroll_depth`, `faq_open`, `calc_use`, `code_copy`, `index_card_click` (모든 이벤트에 `page` 속성 포함)
+- 직접 보내는 이벤트: `lp_view`, `cta_impression`, `cta_click`, `scroll_depth`, `faq_open`, `calc_use`, `code_copy` (모든 이벤트에 `page` 속성 포함)
+
+## CTA 노출·클릭 수집
+버튼에 `data-cta-id="이름"` 만 붙이면 `analytics.js` 가 자동으로 수집합니다.
+
+| 이벤트 | 기준 | 속성 |
+|---|---|---|
+| `cta_impression` | 화면에 50% 이상, 1초 이상 보였을 때 (페이지 로드당 CTA별 1회) | `cta_id`, `cta_label`, `page`, `utm_*`, `creator` |
+| `cta_click` | 클릭할 때마다 | 위와 동일 |
+
+CTR = `cta_click` ÷ `cta_impression` (`cta_id` 로 그룹)
+
+| 페이지 | cta_id |
+|---|---|
+| 냠냠클럽 / 컴백 | `hero_download`, `sticky_download`, `final_download`, `store_ios`, `store_android` |
+| 컴백 (유튜브 유입만) | `creator_code_copy` |
+| 첫 화면 | `card_club`, `card_winback` |

@@ -32,12 +32,12 @@
   <p class="lead">가상 배달앱 브랜드 '냠냠배달'의 광고 랜딩 페이지 모음입니다. 모바일 화면에서 보면 가장 정확해요.</p>
 
   <div class="cards">
-    <a class="card" href="nyamnyam-club-landing.html?utm_source=youtube&amp;utm_campaign=club_free">
+    <a class="card" data-cta-id="card_club" href="nyamnyam-club-landing.html?utm_source=youtube&amp;utm_campaign=club_free">
       <b>냠냠클럽 첫 달 무료</b>
       <p>신규 고객과 1년 넘게 쓰지 않은 고객에게 구독 첫 달 무료 체험을 제안해요.</p>
       <small>유튜브 광고 · 배너 광고</small>
     </a>
-    <a class="card" href="1%ED%8C%80%20%EB%83%A0%EB%83%A0%20%EB%9E%9C%EB%94%A9%ED%8E%98%EC%9D%B4%EC%A7%80.html?utm_source=youtube&amp;creator=mukbang_a">
+    <a class="card" data-cta-id="card_winback" href="1%ED%8C%80%20%EB%83%A0%EB%83%A0%20%EB%9E%9C%EB%94%A9%ED%8E%98%EC%9D%B4%EC%A7%80.html?utm_source=youtube&amp;creator=mukbang_a">
       <b>컴백 쿠폰팩 + 크리에이터 코드</b>
       <p>6개월 넘게 주문하지 않은 고객에게 할인쿠폰, 무료배달, 크리에이터 전용 코드를 줘요.</p>
       <small>유튜브 크리에이터 광고 · 카카오·쿠팡·네이버 배너</small>
@@ -56,10 +56,7 @@
 <script src="https://cdn.jsdelivr.net/npm/@amplitude/analytics-browser@2.11.1/lib/scripts/amplitude-min.js"></script>
 <script src="amplitude-config.js"></script>
 <script src="analytics.js"></script>
-<script>
-document.querySelectorAll("a.card").forEach(a => a.addEventListener("click", () => {
-  window.ampTrack("index_card_click", { target: a.querySelector("b").textContent });
-}));
-</script>
+<!-- 카드 노출·클릭은 analytics.js 가 data-cta-id 로 자동 수집 -->
+
 </body>
 </html>

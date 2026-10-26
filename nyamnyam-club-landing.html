@@ -181,7 +181,7 @@
       </ul>
     </div>
 
-    <a class="btn js-download" data-cta="hero" href="#">앱 받고 무료 체험 시작하기 →</a>
+    <a class="btn js-download" data-cta="hero" data-cta-id="hero_download" href="#">앱 받고 무료 체험 시작하기 →</a>
     <p class="fine">무료 체험 종료 전 언제든 해지 가능 · 위약금 없음</p>
   </header>
 
@@ -285,10 +285,10 @@
     <div class="countdown" aria-label="이벤트 종료까지 남은 시간">
       <span id="cd-d">00</span><span id="cd-h">00</span><span id="cd-m">00</span><span id="cd-s">00</span>
     </div>
-    <a class="btn js-download" data-cta="final" href="#">냠냠 앱 받고 0원으로 시작하기</a>
+    <a class="btn js-download" data-cta="final" data-cta-id="final_download" href="#">냠냠 앱 받고 0원으로 시작하기</a>
     <div class="store-row">
-      <a class="store js-store" data-store="ios" href="#">📱 iOS 앱 받기</a>
-      <a class="store js-store" data-store="android" href="#">🤖 Android 앱 받기</a>
+      <a class="store js-store" data-store="ios" data-cta-id="store_ios" href="#">📱 iOS 앱 받기</a>
+      <a class="store js-store" data-store="android" data-cta-id="store_android" href="#">🤖 Android 앱 받기</a>
     </div>
   </section>
 
@@ -307,7 +307,7 @@
 </div>
 
 <!-- 하단 고정 CTA -->
-<div class="sticky-cta" id="sticky"><a class="btn js-download" data-cta="sticky" href="#">첫 달 무료로 시작하기</a></div>
+<div class="sticky-cta" id="sticky"><a class="btn js-download" data-cta="sticky" data-cta-id="sticky_download" href="#">첫 달 무료로 시작하기</a></div>
 
 <!-- Amplitude: SDK → 설정(.env에서 생성) → 공통 연동 -->
 <script src="https://cdn.jsdelivr.net/npm/@amplitude/analytics-browser@2.11.1/lib/scripts/amplitude-min.js"></script>
@@ -357,14 +357,13 @@ track("lp_view", { lp: "club_free_trial_reacq" });
 document.querySelectorAll(".js-download").forEach(el => {
   el.href = isMobile ? withUtm(CONFIG.oneLink, { af_sub1: el.dataset.cta }) : "#store";
   el.addEventListener("click", e => {
-    track("cta_click", { cta_position: el.dataset.cta });
     if (!isMobile) { e.preventDefault(); document.querySelector(".store-row").scrollIntoView({ behavior: "smooth", block: "center" }); }
   });
 });
 document.querySelectorAll(".js-store").forEach(el => {
   el.href = withUtm(CONFIG[el.dataset.store]);
   el.target = "_blank"; el.rel = "noopener";
-  el.addEventListener("click", () => track("store_click", { store: el.dataset.store }));
+  // 클릭 수집은 analytics.js 의 cta_click 이 담당
 });
 
 /* 절약 계산기 */
