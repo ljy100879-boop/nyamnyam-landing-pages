@@ -52,5 +52,14 @@
 
   <footer>실존 기업·서비스와 무관한 가상 브랜드입니다.</footer>
 </main>
+<!-- Amplitude: SDK → 설정(.env에서 생성) → 공통 연동 -->
+<script src="https://cdn.jsdelivr.net/npm/@amplitude/analytics-browser@2.11.1/lib/scripts/amplitude-min.js"></script>
+<script src="amplitude-config.js"></script>
+<script src="analytics.js"></script>
+<script>
+document.querySelectorAll("a.card").forEach(a => a.addEventListener("click", () => {
+  window.ampTrack("index_card_click", { target: a.querySelector("b").textContent });
+}));
+</script>
 </body>
 </html>

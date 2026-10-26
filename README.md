@@ -14,3 +14,13 @@
 - GTM `dataLayer` 이벤트: `lp_view`, `cta_click`, `store_click`, `scroll_depth`, `faq_open`, `calc_use`, `code_copy`
 
 브라우저에서 HTML 파일을 바로 열어 확인할 수 있습니다.
+
+## Amplitude 연동
+1. `.env.example` 을 복사해 `.env` 를 만들고 키를 채웁니다. (`.env` 는 `.gitignore` 로 커밋되지 않음)
+2. 설정 파일을 만듭니다: `node scripts/build-config.mjs` → `amplitude-config.js` 생성
+3. 커밋·푸시하면 GitHub Pages에 반영됩니다.
+
+- 브라우저에는 **API 키만** 들어갑니다. API 키는 이벤트 전송용 공개 키라 페이지에 노출돼도 되는 값입니다.
+- **비밀 키(`AMPLITUDE_SECRET_KEY`)는 `.env` 에만** 두고, 웹페이지·저장소에는 절대 넣지 않습니다.
+- 자동 수집: 페이지뷰, 세션, UTM 기반 유입 경로(attribution)
+- 직접 보내는 이벤트: `lp_view`, `cta_click`, `store_click`, `scroll_depth`, `faq_open`, `calc_use`, `code_copy`, `index_card_click` (모든 이벤트에 `page` 속성 포함)

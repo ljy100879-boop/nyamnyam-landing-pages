@@ -302,6 +302,10 @@
 <div class="sticky-cta" id="sticky"><a class="btn js-download" data-cta="sticky" href="#">컴백 쿠폰팩 받기</a></div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
+<!-- Amplitude: SDK → 설정(.env에서 생성) → 공통 연동 -->
+<script src="https://cdn.jsdelivr.net/npm/@amplitude/analytics-browser@2.11.1/lib/scripts/amplitude-min.js"></script>
+<script src="amplitude-config.js"></script>
+<script src="analytics.js"></script>
 <script>
 /* ===== 설정: 실제 값으로 교체 ===== */
 const CONFIG = {
@@ -337,7 +341,10 @@ const BANNER_BADGE = {
 
 /* 분석 이벤트: GTM dataLayer 기준 */
 window.dataLayer = window.dataLayer || [];
-function track(event, data = {}) { window.dataLayer.push({ event, ...utm, creator: creatorKey || undefined, ...data }); }
+function track(event, data = {}) {
+  window.dataLayer.push({ event, ...utm, creator: creatorKey || undefined, ...data });
+  window.ampTrack(event, { ...utm, creator: creatorKey, ...data });
+}
 
 /* 크리에이터 개인화 */
 let creator = null;
